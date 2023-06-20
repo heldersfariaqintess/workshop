@@ -1,6 +1,5 @@
 package org.qintess.dto;
 
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,22 +9,26 @@ import java.io.Serializable;
 
 @Setter
 @Getter
-public class StatusDTO implements Serializable {
+public class PlanoDTO implements Serializable {
 
     private Long id;
 
-    @Size(max = 3)
+    @NotNull
+    private Long idProduto;
+
+    @Size(max = 7)
     @NotNull
     private String codigo;
 
-    @Size(max = 50)
+    @Size(max = 40)
     @NotNull
     private String nome;
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("StatusDTO{");
+        final StringBuilder sb = new StringBuilder("PlanoDTO{");
         sb.append("id=").append(id);
+        sb.append(", idProduto=").append(idProduto);
         sb.append(", codigo='").append(codigo).append('\'');
         sb.append(", nome='").append(nome).append('\'');
         sb.append('}');

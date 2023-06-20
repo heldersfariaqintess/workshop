@@ -14,32 +14,27 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
+
 @Setter
 @Getter
 @Entity
-@Table(name = "STATUS", schema = "dbo")
-public class Status implements Serializable {
+@Table(name = "FORMA_PAGAMENTO", schema = "dbo")
+public class FormaPagamento implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "NU_STATUS", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "NU_FORMA_PAGAMENTO", nullable = false)
     private Long id;
 
-    @Size(max = 3)
+    @Size(max = 30)
     @NotNull
-    @Column(name = "CO_STATUS", length = 3, nullable = false)
-    private String codigo;
-
-    @Size(max = 50)
-    @NotNull
-    @Column(name = "NO_STATUS", length = 50, nullable = false)
+    @Column(name = "NO_FORMA_PAGAMENTO", length = 30, nullable = false)
     private String nome;
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Status{");
+        final StringBuilder sb = new StringBuilder("FormaPagamento{");
         sb.append("id=").append(id);
-        sb.append(", codigo='").append(codigo).append('\'');
         sb.append(", nome='").append(nome).append('\'');
         sb.append('}');
         return sb.toString();
