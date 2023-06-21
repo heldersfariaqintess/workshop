@@ -5,6 +5,7 @@ import org.qintess.dto.StatusDTO;
 import org.qintess.service.StatusService;
 
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -28,5 +29,10 @@ public class ClienteV3Controller {
     @Path("/{id}")
     public Optional<ClienteDTO> findById(@PathParam("id") Long id) {
         return Optional.empty();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public void delete(@PathParam("id") Long id) {
     }
 }
