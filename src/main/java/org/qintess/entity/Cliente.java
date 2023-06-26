@@ -39,7 +39,7 @@ public class Cliente {
 
     @NotNull
     @Column(name = "NU_CEP")
-    private Long cep;
+    private Integer cep;
 
     @Size(max = 53)
     @NotNull
