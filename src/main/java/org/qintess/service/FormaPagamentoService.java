@@ -74,20 +74,75 @@ public class FormaPagamentoService {
         repository.deleteNative(id);
     }
 
-    //JPQL
-
-    public List<FormaPagamentoDTO> findAllJpql() {
-        return repository.findAllJpql().stream().map(formaPagamentoMapper::toDto).collect(toList());
+    //JPQL e HQL
+    public List<FormaPagamentoDTO> findAllJpql(String nome) {
+        return repository.findAllJpql(nome).stream().map(formaPagamentoMapper::toDto).collect(toList());
     }
 
+    public Optional<FormaPagamentoDTO> findByIdJpql(Long id) {
+        return repository.findByIdJpql(id).map(formaPagamentoMapper::toDto);
+    }
 
-    public List<FormaPagamentoDTO> findAllPanache() {
-        return repository.findAll().stream().map(formaPagamentoMapper::toDto).collect(toList());
+    public FormaPagamentoDTO saveJqpl(@Valid FormaPagamentoDTO formaPagamentoDTO) {
+        FormaPagamento entity = formaPagamentoMapper.toEntity(formaPagamentoDTO);
+        entity = repository.saveJpql(entity);
+        return formaPagamentoMapper.toDto(entity);
+    }
+
+    public FormaPagamentoDTO updateJpql(@Valid FormaPagamentoDTO dto) {
+
+        Optional<FormaPagamento> formaPagamentoBanco = repository.findByIdJpql(dto.getId());
+
+        if (formaPagamentoBanco.isEmpty()) {
+            throw new NotFoundQintessException("Forma Pagamento não encontrada.");
+        }
+
+        FormaPagamento entity = formaPagamentoBanco.get();
+
+        entity.setNome(dto.getNome());
+
+        entity = repository.updateJpql(entity);
+
+        return formaPagamentoMapper.toDto(entity);
+    }
+
+    public void deleteJqpl(Long id) {
+        Optional<FormaPagamento> formaPagamentoBanco = repository.findByIdJpql(id);
+
+        if (formaPagamentoBanco.isEmpty()) {
+            throw new NotFoundQintessException("Forma Pagamento não encontrada.");
+        }
+        repository.deleteJpql(id);
     }
 
     //USANDO FRAMEWORK PANACHE
+    public List<FormaPagamentoDTO> findAllPanache(String nome) {
+        return repository.findAll(nome).stream().map(formaPagamentoMapper::toDto).collect(toList());
+    }
 
-    public List<FormaPagamentoDTO> findAll() {
-        return repository.findAll().stream().map(this.formaPagamentoMapper::toDto).collect(toList());
+    public Optional<FormaPagamentoDTO> findByIdPanache(Long id) {
+        return Optional.ofNullable(repository.findById(id)).map(formaPagamentoMapper::toDto);
+    }
+
+    public FormaPagamentoDTO updatePanache(@Valid FormaPagamentoDTO dto) {
+        FormaPagamento entity = formaPagamentoMapper.toEntity(dto);
+        repository.update(entity);
+        return formaPagamentoMapper.toDto(entity);
+    }
+
+    public FormaPagamentoDTO savePanache(@Valid FormaPagamentoDTO dto) {
+        FormaPagamento entity = formaPagamentoMapper.toEntity(dto);
+        repository.persist(entity);
+        return formaPagamentoMapper.toDto(entity);
+    }
+
+    public void deletePanache(Long id) {
+        FormaPagamento formaPagamentoBanco = repository.findById(id);
+
+        if (formaPagamentoBanco == null) {
+            throw new NotFoundQintessException("Forma Pagamento não encontrada.");
+        }
+
+        repository.deleteById(id);
     }
 }
