@@ -1,7 +1,9 @@
 package org.qintess.controller;
 
 import org.qintess.dto.FormaPagamentoDTO;
+import org.qintess.service.FormaPagamentoService;
 
+import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -18,10 +20,13 @@ import java.util.Optional;
 @Path("/v3/formas-pagamento")
 public class FormaPagamentoV3Controller {
 
+    @Inject
+    FormaPagamentoService formaPagamentoService;
+
     @GET
     @Path("/")
     public List<FormaPagamentoDTO> findAll() {
-        return Collections.emptyList();
+        return formaPagamentoService.findAllPanache();
     }
 
     @GET
