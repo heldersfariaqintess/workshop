@@ -1,6 +1,5 @@
 package org.qintess.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +9,6 @@ import java.io.Serializable;
 
 @Setter
 @Getter
-@AllArgsConstructor
 public class PlanoServicoId implements Serializable {
 
     @NotNull
@@ -20,6 +18,14 @@ public class PlanoServicoId implements Serializable {
     @NotNull
     @Column(name = "NU_SERVICO", nullable = false)
     private Long idServico;
+
+    public PlanoServicoId() {
+    }
+
+    public PlanoServicoId(Long idPlano, Long idServico) {
+        this.idPlano = idPlano;
+        this.idServico = idServico;
+    }
 
     @Override
     public String toString() {

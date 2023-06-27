@@ -121,13 +121,17 @@ public class FormaPagamentoService {
     }
 
     public Optional<FormaPagamentoDTO> findByIdPanache(Long id) {
-        return Optional.ofNullable(repository.findById(id)).map(formaPagamentoMapper::toDto);
+        if (id == null) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(repository.findById(id))
+                .map(formaPagamentoMapper::toDto);
     }
 
     public FormaPagamentoDTO updatePanache(@Valid FormaPagamentoDTO dto) {
-        FormaPagamento entity = formaPagamentoMapper.toEntity(dto);
-        repository.update(entity);
-        return formaPagamentoMapper.toDto(entity);
+        repository.update(formaPagamentoMapper.toEntity(dto));
+        return dto;
     }
 
     public FormaPagamentoDTO savePanache(@Valid FormaPagamentoDTO dto) {

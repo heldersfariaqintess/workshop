@@ -1,14 +1,15 @@
 package org.qintess.controller;
 
 import org.qintess.dto.PlanoCompletoDTO;
+import org.qintess.service.PlanoCompletoService;
 
+import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,10 +19,13 @@ import java.util.Optional;
 @Path("/v2/planos")
 public class PlanoV2Controller {
 
+    @Inject
+    PlanoCompletoService planoCompletoService;
+
     @GET
     @Path("/")
     public List<PlanoCompletoDTO> findAll() {
-        return Collections.emptyList();
+        return planoCompletoService.findAllJpql();
     }
 
     @GET
@@ -33,7 +37,7 @@ public class PlanoV2Controller {
     @POST
     @Path("/")
     public PlanoCompletoDTO save(PlanoCompletoDTO plano) {
-        return plano;
+        return planoCompletoService.saveJpql(plano);
     }
 
     @PUT

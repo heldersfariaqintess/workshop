@@ -1,6 +1,5 @@
 package org.qintess.controller;
 
-import org.qintess.dto.PlanoCompletoDTO;
 import org.qintess.dto.ProdutoDTO;
 
 import javax.ws.rs.DELETE;

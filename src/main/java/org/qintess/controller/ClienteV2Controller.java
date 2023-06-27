@@ -1,10 +1,7 @@
 package org.qintess.controller;
 
 import org.qintess.dto.ClienteDTO;
-import org.qintess.dto.StatusDTO;
-import org.qintess.service.StatusService;
 
-import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

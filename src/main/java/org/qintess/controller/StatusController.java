@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 

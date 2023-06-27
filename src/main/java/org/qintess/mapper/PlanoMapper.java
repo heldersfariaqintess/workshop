@@ -8,5 +8,4 @@ import org.qintess.entity.Plano;
 
 @Mapper(componentModel = "cdi")
 public interface PlanoMapper extends EntityMapper<PlanoDTO, Plano> {
-
 }
